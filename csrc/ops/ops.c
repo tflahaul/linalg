@@ -1,9 +1,5 @@
 #include "tensor.h"
 
-#ifndef NULL
-# define NULL (void *)0
-#endif /* NULL */
-
 static inline void	__ops_cpu_add(struct Tensor *dst, struct Tensor *a, struct Tensor *b) {
 	for (uint32_t index = 0; index < TENSOR_NUMEL(dst); index++)
 		dst->data[index] = a->data[index] + b->data[index];

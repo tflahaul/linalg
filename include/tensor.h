@@ -3,24 +3,27 @@
 
 #include <stdint.h>
 
-#define SUPPORTED_DIMS	2
+#define MAX_SUPPORTED_DIMS 2
+
+#ifndef NULL
+# define NULL (void *)0
+#endif /* NULL */
 
 typedef float f32_t;
- 
+
 struct Tensor {
-	uint32_t	shape[SUPPORTED_DIMS];
+	uint32_t	shape[MAX_SUPPORTED_DIMS];
 	f32_t		*data;
 };
 
-#define TENSOR_ISVEC(x)	((x)->shape[1] == 1 || (x)->shape[0] == 1)
 #define TENSOR_NUMEL(x)	((x)->shape[0] * (x)->shape[1])
-#define TENSOR_SQUARE(x)((x)->shape[0] == (x)->shape[1])
 
-struct Tensor		*tensor_init(uint32_t n, uint32_t m);
-struct Tensor		*tensor_rand_init(uint32_t n, uint32_t m);
-struct Tensor		*tensor_constant_init(uint32_t n, uint32_t m, f32_t x);
+struct Tensor	*tensor_init(uint32_t n, uint32_t m);
+struct Tensor	*tensor_init_random(uint32_t n, uint32_t m);
+struct Tensor	*tensor_init_constant(uint32_t n, uint32_t m, f32_t x);
+struct Tensor	*tensor_init_from_array(f32_t *data, uint32_t r, uint32_t c);
 
-void			tensor_print(struct Tensor *tensor);
-void			tensor_free(struct Tensor *tensor);
+void		tensor_print(struct Tensor *tensor);
+void		tensor_free(struct Tensor *tensor);
 
 #endif /* __TENSOR_H__ */
