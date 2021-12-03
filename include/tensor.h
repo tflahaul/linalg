@@ -22,6 +22,7 @@ struct Tensor	*tensor_init(uint32_t n, uint32_t m);
 struct Tensor	*tensor_init_random(uint32_t n, uint32_t m);
 struct Tensor	*tensor_init_constant(uint32_t n, uint32_t m, f32_t x);
 struct Tensor	*tensor_init_from_array(f32_t *data, uint32_t r, uint32_t c);
+struct Tensor	*tensor_init_from_tensor(struct Tensor *src);
 
 void		tensor_print(struct Tensor *tensor);
 void		tensor_free(struct Tensor *tensor);
