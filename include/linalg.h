@@ -13,7 +13,7 @@ struct Tensor	*mm(struct Tensor *a, struct Tensor *b);
 
 struct Tensor	*transpose(struct Tensor *a);
 
-struct Tensor	*row_echelon(struct Tensor *a);
+struct Tensor	*rref(struct Tensor *a);
 
 f32_t		dot(struct Tensor *a, struct Tensor *b);
 
