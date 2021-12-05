@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-static void		row_swap(struct Tensor *mat, uint32_t a, uint32_t b) {
+static void		swap(struct Tensor *mat, uint32_t a, uint32_t b) {
 	f32_t		tmp;
 	for (uint32_t index = 0; index < mat->shape[1]; index++) {
 		tmp = mat->data[(a * mat->shape[1]) + index];
@@ -11,30 +11,35 @@ static void		row_swap(struct Tensor *mat, uint32_t a, uint32_t b) {
 	}
 }
 
-static void		gauss_jordan_elimination(struct Tensor *mat) {
-	uint32_t	row = 0;
+static uint32_t		argmax(struct Tensor *a, uint32_t start, uint32_t col) {
+	uint32_t	index = start;
+	for (uint32_t i = start + 1; i < a->shape[1]; i++)
+		if (fabsf(a->data[(i * a->shape[1]) + col]) > fabsf(a->data[(start * a->shape[1]) + col]))
+			index = i;
+	return (index);
+}
+
+static void		gauss_jordan_elimination(struct Tensor *a) {
+	uint32_t	r = 0;
 	uint32_t	k;
 	f32_t		f;
 	f32_t		p;
-	for (uint32_t c = 0; c < mat->shape[1]; c++) {
-		k = row;
-		for (uint32_t idx = row + 1; idx < mat->shape[0]; idx++)
-			if (fabsf(mat->data[(idx * mat->shape[1]) + c]) > fabsf(mat->data[(k * mat->shape[1]) + c]))
-				k = idx;
-		p = mat->data[(k * mat->shape[1]) + c];
+	for (uint32_t c = 0; c < a->shape[1]; c++) {
+		k = argmax(a, r, c);
+		p = a->data[(k * a->shape[1]) + c];
 		if (fabsf(p) >= 1e-8) {
-			for (uint32_t idx = 0; idx < mat->shape[1]; idx++)
-				mat->data[(k * mat->shape[1]) + idx] /= p;
-			if (k != row)
-				row_swap(mat, k, row);
-			for (uint32_t i = 0; i < mat->shape[0]; i++) {
-				if (i != row) {
-					f = mat->data[(i * mat->shape[1]) + c];
-					for (uint32_t j = 0; j < mat->shape[1]; j++)
-						mat->data[(i * mat->shape[1]) + j] -= (mat->data[(row * mat->shape[1]) + j] * f);
+			for (uint32_t index = 0; index < a->shape[1]; index++)
+				a->data[(k * a->shape[1]) + index] /= p;
+			if (k != r)
+				swap(a, k, r);
+			for (uint32_t i = 0; i < a->shape[0]; i++) {
+				if (i != r) {
+					f = a->data[(i * a->shape[1]) + c];
+					for (uint32_t j = 0; j < a->shape[1]; j++)
+						a->data[(i * a->shape[1]) + j] -= (a->data[(r * a->shape[1]) + j] * f);
 				}
 			}
-			row = row + 1;
+			r = r + 1;
 		}
 	}
 }

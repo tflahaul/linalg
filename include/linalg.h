@@ -27,4 +27,6 @@ f32_t		angle(struct Tensor *a, struct Tensor *b);
 
 f32_t		trace(struct Tensor *a);
 
+uint32_t	rank(struct Tensor *a);
+
 #endif /* __LINALG_H__ */
