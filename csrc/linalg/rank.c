@@ -3,7 +3,7 @@
 #include <math.h>
 
 static inline void	swap(struct Tensor *a, uint32_t x, uint32_t y) {
-	f32_t		tmp;
+	float		tmp;
 	for (uint32_t index = 0; index < a->shape[1]; index++) {
 		tmp = a->data[(x * a->shape[1]) + index];
 		a->data[(x * a->shape[1]) + index] = a->data[(y * a->shape[1]) + index];
@@ -16,7 +16,7 @@ static uint32_t		gaussian_elimination_rank(struct Tensor *a) {
 	uint32_t	k = 0;
 	uint32_t	p = 0;
 	uint32_t	index;
-	f32_t		f;
+	float		f;
 	while (h < a->shape[0] && k < a->shape[1]) {
 		index = h;
 		for (uint32_t i = h + 1; i < a->shape[0]; i++)

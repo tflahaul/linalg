@@ -10,7 +10,7 @@ struct Tensor		*tensor_init(uint32_t n, uint32_t m) {
 	if ((tensor = (struct Tensor *)malloc(sizeof(struct Tensor))) == NULL)
 		return (NULL);
 	uint32_t items = (n * m);
-	if ((tensor->data = (f32_t *)malloc(sizeof(f32_t) * items)) == NULL)
+	if ((tensor->data = (float *)malloc(sizeof(float) * items)) == NULL)
 		return (NULL);
 	tensor->shape[0] = n;
 	tensor->shape[1] = m;
@@ -23,11 +23,11 @@ struct Tensor		*tensor_init_random(uint32_t n, uint32_t m) {
 		return (NULL);
 	srand((uint32_t)time(NULL) + rand());
 	for (uint32_t index = 0; index < TENSOR_NUMEL(tensor); index++)
-		tensor->data[index] = (f32_t)rand() / RAND_MAX;
+		tensor->data[index] = (float)rand() / RAND_MAX;
 	return (tensor);
 }
 
-struct Tensor		*tensor_init_constant(uint32_t n, uint32_t m, f32_t x) {
+struct Tensor		*tensor_init_constant(uint32_t n, uint32_t m, float x) {
 	struct Tensor	*tensor;
 	if ((tensor = tensor_init(n, m)) == NULL)
 		return (NULL);
@@ -36,11 +36,11 @@ struct Tensor		*tensor_init_constant(uint32_t n, uint32_t m, f32_t x) {
 	return (tensor);
 }
 
-struct Tensor		*tensor_init_from_array(f32_t *data, uint32_t r, uint32_t c) {
+struct Tensor		*tensor_init_from_array(float *data, uint32_t r, uint32_t c) {
 	struct Tensor	*tensor;
 	if ((tensor = tensor_init(r, c)) == NULL)
 		return (NULL);
-	memcpy(tensor->data, data, (sizeof(f32_t) * r * c));
+	memcpy(tensor->data, data, (sizeof(float) * r * c));
 	return (tensor);
 }
 
@@ -48,7 +48,7 @@ struct Tensor		*tensor_init_from_tensor(struct Tensor *src) {
 	struct Tensor	*tensor;
 	if ((tensor = tensor_init(src->shape[0], src->shape[1])) == NULL)
 		return (NULL);
-	memcpy(tensor->data, src->data, (sizeof(f32_t) * TENSOR_NUMEL(src)));
+	memcpy(tensor->data, src->data, (sizeof(float) * TENSOR_NUMEL(src)));
 	return (tensor);
 }
 

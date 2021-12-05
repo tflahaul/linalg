@@ -3,7 +3,7 @@
 #include <math.h>
 
 static void		swap(struct Tensor *mat, uint32_t a, uint32_t b) {
-	f32_t		tmp;
+	float		tmp;
 	for (uint32_t index = 0; index < mat->shape[1]; index++) {
 		tmp = mat->data[(a * mat->shape[1]) + index];
 		mat->data[(a * mat->shape[1]) + index] = mat->data[(b * mat->shape[1]) + index];
@@ -22,8 +22,8 @@ static uint32_t		argmax(struct Tensor *a, uint32_t start, uint32_t col) {
 static void		gauss_jordan_elimination(struct Tensor *a) {
 	uint32_t	r = 0;
 	uint32_t	k;
-	f32_t		f;
-	f32_t		p;
+	float		f;
+	float		p;
 	for (uint32_t c = 0; c < a->shape[1]; c++) {
 		k = argmax(a, r, c);
 		p = a->data[(k * a->shape[1]) + c];

@@ -44,3 +44,10 @@ Returns the reduced row echelon form of the given matrix.
 ### rank
 ```unsigned int rank(struct Tensor *a);```<br/>
 Returns the rank of the given matrix.
+
+### det
+```float det(struct Tensor *a);```<br/>
+Returns the determinant of the given square matrix. Only supports 2x2 and 3x3 matrices for now.
+
+### inverse
+```struct Tensor *inverse(struct Tensor *a);```<br/>

@@ -9,19 +9,17 @@
 # define NULL (void *)0
 #endif /* NULL */
 
-typedef float f32_t;
-
 struct Tensor {
 	uint32_t	shape[MAX_SUPPORTED_DIMS];
-	f32_t		*data;
+	float		*data;
 };
 
 #define TENSOR_NUMEL(x)	((x)->shape[0] * (x)->shape[1])
 
 struct Tensor	*tensor_init(uint32_t n, uint32_t m);
 struct Tensor	*tensor_init_random(uint32_t n, uint32_t m);
-struct Tensor	*tensor_init_constant(uint32_t n, uint32_t m, f32_t x);
-struct Tensor	*tensor_init_from_array(f32_t *data, uint32_t r, uint32_t c);
+struct Tensor	*tensor_init_constant(uint32_t n, uint32_t m, float x);
+struct Tensor	*tensor_init_from_array(float *data, uint32_t r, uint32_t c);
 struct Tensor	*tensor_init_from_tensor(struct Tensor *src);
 
 void		tensor_print(struct Tensor *tensor);
