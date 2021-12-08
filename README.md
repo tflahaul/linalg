@@ -47,7 +47,7 @@ Returns the rank of the given matrix.
 
 ### det
 ```float det(struct Tensor *a);```<br/>
-Returns the determinant of the given square matrix. Only supports 2x2 and 3x3 matrices for now.
+Returns the determinant of the given square matrix.
 
 ### inverse
 ```struct Tensor *inverse(struct Tensor *a);```<br/>
