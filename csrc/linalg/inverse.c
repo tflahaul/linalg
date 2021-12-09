@@ -2,8 +2,6 @@
 #include "tensor.h"
 #include "linalg.h"
 
-#include <stdio.h>
-
 static struct Tensor	*augmented_matrix(struct Tensor *a) {
 	struct Tensor	*aug;
 	if ((aug = tensor_init(a->shape[0], 2 * a->shape[1])) == NULL)
@@ -29,10 +27,10 @@ static struct Tensor	*extract_inverse_from_aug(struct Tensor *a) {
 struct Tensor		*inverse(struct Tensor *a) {
 	struct Tensor	*aug, *inv;
 	assert_tensor_is_square(a);
-	assert_non_zero_determinant(a);
 	if ((aug = augmented_matrix(a)) == NULL)
 		return (NULL);
-	if ((inv = extract_inverse_from_aug(rref_(aug))) == NULL) {
+	assert_invertible(rref_(aug));
+	if ((inv = extract_inverse_from_aug(aug)) == NULL) {
 		tensor_free(aug);
 		return (NULL);
 	}
