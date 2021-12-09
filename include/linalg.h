@@ -14,6 +14,7 @@ struct Tensor	*mm(struct Tensor *a, struct Tensor *b);
 struct Tensor	*transpose(struct Tensor *a);
 
 struct Tensor	*rref(struct Tensor *a);
+struct Tensor	*rref_(struct Tensor *a);
 
 struct Tensor	*inverse(struct Tensor *a);
 

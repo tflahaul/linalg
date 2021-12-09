@@ -41,6 +41,10 @@ Flips `a` over it's diagonal.
 ```struct Tensor *rref(struct Tensor *a);```<br/>
 Returns the reduced row echelon form of the given matrix.
 
+### rref_
+```struct Tensor *rref_(struct Tensor *a);```<br/>
+`rref` but in-place.
+
 ### rank
 ```unsigned int rank(struct Tensor *a);```<br/>
 Returns the rank of the given matrix.
@@ -51,3 +55,4 @@ Returns the determinant of the given square matrix.
 
 ### inverse
 ```struct Tensor *inverse(struct Tensor *a);```<br/>
+If the given matrix is invertible, returns its inverse.

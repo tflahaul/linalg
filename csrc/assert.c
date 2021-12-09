@@ -1,5 +1,6 @@
 #include "assert.h"
 #include "tensor.h"
+#include "linalg.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,6 +37,13 @@ void	assert_tensor_mm_able(struct Tensor *a, struct Tensor *b) {
 	if ((a->shape[1] == b->shape[0]) == 0) {
 		fprintf(stderr, "error: %ux%u and %ux%u cannot be multiplied\n",\
 			a->shape[0], a->shape[1], b->shape[0], b->shape[1]);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	assert_non_zero_determinant(struct Tensor *a) {
+	if (det(a) == 0.0) {
+		fprintf(stderr, "error: the determinant of the linear transformation determined by the matrix is 0\n");
 		exit(EXIT_FAILURE);
 	}
 }

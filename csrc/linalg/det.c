@@ -55,8 +55,8 @@ static float		det3x3(struct Tensor *a) {
 
 static float		detnxn(struct Tensor *a) {
 	struct Tensor	*ref;
-	float		determinant = 1.0;
 	float		sig;
+	float		determinant = 1.0;
 	if ((ref = tensor_init_from_tensor(a)) == NULL)
 		return (0.);
 	sig = gaussian_elimination_det(ref);
