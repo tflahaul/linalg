@@ -43,7 +43,7 @@ void	assert_tensor_mm_able(struct Tensor *a, struct Tensor *b) {
 
 void	assert_invertible(struct Tensor *a) {
 	for (uint32_t index = 0; index < a->shape[0]; index++) {
-		if (a->data[(index * a->shape[1]) + index] != 0.0) {
+		if (a->data[(index * a->shape[1]) + index] == 0.0) {
 			fprintf(stderr, "error: matrix is singular.\n");
 			exit(EXIT_FAILURE);
 		}

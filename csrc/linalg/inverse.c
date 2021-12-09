@@ -4,7 +4,7 @@
 
 static struct Tensor	*augmented_matrix(struct Tensor *a) {
 	struct Tensor	*aug;
-	if ((aug = tensor_init(a->shape[0], 2 * a->shape[1])) == NULL)
+	if ((aug = tensor_init_constant(a->shape[0], 2 * a->shape[1], 0.)) == NULL)
 		return (NULL);
 	for (uint32_t i = 0; i < a->shape[0]; i++) {
 		for (uint32_t j = 0; j < a->shape[1]; j++)
