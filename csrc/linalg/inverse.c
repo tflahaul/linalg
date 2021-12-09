@@ -8,8 +8,8 @@ static struct Tensor	*augmented_matrix(struct Tensor *a) {
 		return (NULL);
 	for (uint32_t i = 0; i < a->shape[0]; i++) {
 		for (uint32_t j = 0; j < a->shape[1]; j++)
-			aug->data[(i * aug->shape[1]) + j] = a->data[(i * a->shape[1]) + j];
-		aug->data[(i * aug->shape[1]) + i + a->shape[1]] = 1.;
+			aug->data[i * aug->shape[1] + j] = a->data[i * a->shape[1] + j];
+		aug->data[i * aug->shape[1] + i + a->shape[1]] = 1.;
 	}
 	return (aug);
 }
@@ -20,7 +20,7 @@ static struct Tensor	*extract_inverse_from_aug(struct Tensor *a) {
 		return (NULL);
 	for (uint32_t i = 0; i < inv->shape[0]; i++)
 		for (uint32_t j = 0; j < inv->shape[1]; j++)
-			inv->data[(i * a->shape[0]) + j] = a->data[(i * a->shape[1]) + j + inv->shape[1]];
+			inv->data[i * a->shape[0] + j] = a->data[i * a->shape[1] + j + inv->shape[1]];
 	return (inv);
 }
 

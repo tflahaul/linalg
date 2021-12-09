@@ -5,16 +5,16 @@
 static void		swap(struct Tensor *mat, uint32_t a, uint32_t b) {
 	float		tmp;
 	for (uint32_t index = 0; index < mat->shape[1]; index++) {
-		tmp = mat->data[(a * mat->shape[1]) + index];
-		mat->data[(a * mat->shape[1]) + index] = mat->data[(b * mat->shape[1]) + index];
-		mat->data[(b * mat->shape[1]) + index] = tmp;
+		tmp = mat->data[a * mat->shape[1] + index];
+		mat->data[a * mat->shape[1] + index] = mat->data[b * mat->shape[1] + index];
+		mat->data[b * mat->shape[1] + index] = tmp;
 	}
 }
 
 static uint32_t		argmax(struct Tensor *a, uint32_t start, uint32_t col) {
 	uint32_t	index = start;
 	for (uint32_t i = start + 1; i < a->shape[1]; i++)
-		if (fabsf(a->data[(i * a->shape[1]) + col]) > fabsf(a->data[(start * a->shape[1]) + col]))
+		if (fabsf(a->data[i * a->shape[1] + col]) > fabsf(a->data[start * a->shape[1] + col]))
 			index = i;
 	return (index);
 }
@@ -26,17 +26,17 @@ static void		gauss_jordan_elimination(struct Tensor *a) {
 	float		p;
 	for (uint32_t c = 0; c < a->shape[1]; c++) {
 		k = argmax(a, r, c);
-		p = a->data[(k * a->shape[1]) + c];
+		p = a->data[k * a->shape[1] + c];
 		if (fabsf(p) >= 1e-8) {
 			for (uint32_t index = 0; index < a->shape[1]; index++)
-				a->data[(k * a->shape[1]) + index] /= p;
+				a->data[k * a->shape[1] + index] /= p;
 			if (k != r)
 				swap(a, k, r);
 			for (uint32_t i = 0; i < a->shape[0]; i++) {
 				if (i != r) {
-					f = a->data[(i * a->shape[1]) + c];
+					f = a->data[i * a->shape[1] + c];
 					for (uint32_t j = 0; j < a->shape[1]; j++)
-						a->data[(i * a->shape[1]) + j] -= (a->data[(r * a->shape[1]) + j] * f);
+						a->data[i * a->shape[1] + j] -= (a->data[r * a->shape[1] + j] * f);
 				}
 			}
 			r = r + 1;

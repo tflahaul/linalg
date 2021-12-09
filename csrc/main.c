@@ -1,16 +1,18 @@
 #include "tensor.h"
 #include "linalg.h"
+#include "ops.h"
 
 #include <stdio.h>
 
 int			main(void) {
-	float		data[] = {0.9624, 0.3576, 0.3314, 0.0830, 0.6321, 0.9403, 0., 0., 0.}; // 0.8249, 0.4797, 0.6575
 	struct Tensor	*a;
+	struct Tensor	*b = tensor_init_constant(50, 50, 0.5);
 
-	a = tensor_init_from_array(data, 3, 3);
-	tensor_print(a);
-	printf("\n");
-	tensor_print(inverse(a));
+	a = sub(tensor_init_random(50, 50), b);
+
+	float out = det(a);
+	printf("det = %f\n", out);
 	tensor_free(a);
+	tensor_free(b);
 	return (0);
 }

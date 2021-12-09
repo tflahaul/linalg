@@ -3,9 +3,9 @@
 
 static inline void	__ops_cpu_cross(struct Tensor *dst, struct Tensor *a, struct Tensor *b) {
 	for (uint32_t i = 0; i < a->shape[0]; i++) {
-		dst->data[0 + (i * dst->shape[1])] = (a->data[1 + (i * 3)] * b->data[2 + (i * 3)]) - (a->data[2 + (i * 3)] * b->data[1 + (i * 3)]);
-		dst->data[1 + (i * dst->shape[1])] = (a->data[2 + (i * 3)] * b->data[0 + (i * 3)]) - (a->data[0 + (i * 3)] * b->data[2 + (i * 3)]);
-		dst->data[2 + (i * dst->shape[1])] = (a->data[0 + (i * 3)] * b->data[1 + (i * 3)]) - (a->data[1 + (i * 3)] * b->data[0 + (i * 3)]);
+		dst->data[i * dst->shape[1] + 0] = (a->data[i * 3 + 1] * b->data[i * 3 + 2]) - (a->data[i * 3 + 2] * b->data[i * 3 + 1]);
+		dst->data[i * dst->shape[1] + 1] = (a->data[i * 3 + 2] * b->data[i * 3 + 0]) - (a->data[i * 3 + 0] * b->data[i * 3 + 2]);
+		dst->data[i * dst->shape[1] + 2] = (a->data[i * 3 + 0] * b->data[i * 3 + 1]) - (a->data[i * 3 + 1] * b->data[i * 3 + 0]);
 	}
 }
 

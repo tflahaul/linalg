@@ -6,7 +6,7 @@ static inline void	__ops_cpu_mm(struct Tensor *dst, struct Tensor *a, struct Ten
 	for (uint32_t k = 0; k < a->shape[1]; k++)
 		for (uint32_t i = 0; i < a->shape[0]; i++)
 			for (uint32_t j = 0; j < dst->shape[1]; j++)
-				dst->data[j + (i * b->shape[1])] += a->data[k + (i * b->shape[1])] * b->data[j + (k * b->shape[1])];
+				dst->data[i * b->shape[1] + j] += a->data[i * b->shape[1] + k] * b->data[k * b->shape[1] + j];
 }
 
 struct Tensor		*mm(struct Tensor *a, struct Tensor *b) {

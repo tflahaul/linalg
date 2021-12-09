@@ -21,9 +21,9 @@ static float		gaussian_elimination_det(struct Tensor *a) {
 	while (h < a->shape[0] && k < a->shape[1]) {
 		index = h;
 		for (uint32_t i = h + 1; i < a->shape[0]; i++)
-			if (fabsf(a->data[(i * a->shape[1]) + k]) > fabsf(a->data[(index * a->shape[1]) + k]))
+			if (fabsf(a->data[i * a->shape[1] + k]) > fabsf(a->data[index * a->shape[1] + k]))
 				index = i;
-		if (fabsf(a->data[(index * a->shape[1]) + k]) < 1e-8) { // no pivot
+		if (fabsf(a->data[index * a->shape[1] + k]) < 1e-8) { // no pivot
 			k = k + 1;
 		} else {
 			if (h != index) {
@@ -31,10 +31,10 @@ static float		gaussian_elimination_det(struct Tensor *a) {
 				p = -p;
 			}
 			for (uint32_t i = h + 1; i < a->shape[0]; i++) {
-				f = a->data[(i * a->shape[1]) + k] / a->data[(h * a->shape[1]) + k];
-				a->data[(i * a->shape[1]) + k] = 0.;
+				f = a->data[i * a->shape[1] + k] / a->data[h * a->shape[1] + k];
+				a->data[i * a->shape[1] + k] = 0.;
 				for (uint32_t j = k + 1; j < a->shape[1]; j++)
-					a->data[(i * a->shape[1]) + j] -= (a->data[(h * a->shape[1]) + j] * f);
+					a->data[i * a->shape[1] + j] -= (a->data[h * a->shape[1] + j] * f);
 			}
 			h = h + 1;
 			k = k + 1;
@@ -61,7 +61,7 @@ static float		detnxn(struct Tensor *a) {
 		return (0.);
 	sig = gaussian_elimination_det(ref);
 	for (uint32_t index = 0; index < ref->shape[0]; index++)
-		determinant *= ref->data[(index * ref->shape[1]) + index];
+		determinant *= ref->data[index * ref->shape[1] + index];
 	tensor_free(ref);
 	return (determinant * sig);
 }
