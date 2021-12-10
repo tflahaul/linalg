@@ -27,7 +27,7 @@ static void		gauss_jordan_elimination(struct Tensor *a) {
 	for (uint32_t c = 0; c < a->shape[1]; c++) {
 		k = argmax(a, r, c);
 		p = a->data[k * a->shape[1] + c];
-		if (fabsf(p) >= 1e-8) {
+		if (fabsf(p) > 1e-8) {
 			for (uint32_t index = 0; index < a->shape[1]; index++)
 				a->data[k * a->shape[1] + index] /= p;
 			if (k != r)
@@ -44,16 +44,16 @@ static void		gauss_jordan_elimination(struct Tensor *a) {
 	}
 }
 
-struct Tensor		*rref(struct Tensor *a) {
+struct Tensor		*rref(struct Tensor *tensor) {
 	struct Tensor	*out;
-	if ((out = tensor_init_from_tensor(a)) == NULL)
+	if ((out = tensor_init_from_tensor(tensor)) == NULL)
 		return (NULL);
 	gauss_jordan_elimination(out);
 	return (out);
 }
 
-struct Tensor		*rref_(struct Tensor *a) {
-	struct Tensor	*out = a;
+struct Tensor		*rref_(struct Tensor *tensor) {
+	struct Tensor	*out = tensor;
 	gauss_jordan_elimination(out);
 	return (out);
 }

@@ -1,6 +1,6 @@
 #include "tensor.h"
 #include "linalg.h"
 
-float		angle(struct Tensor *a, struct Tensor *b) {
-	return (dot(a, b) / (norm(a) * norm(b)));
+float		angle(struct Tensor *lhs, struct Tensor *rhs) {
+	return (dot(lhs, rhs) / (norm(lhs) * norm(rhs)));
 }

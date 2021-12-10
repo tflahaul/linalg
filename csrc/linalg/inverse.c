@@ -24,10 +24,10 @@ static struct Tensor	*extract_inverse_from_aug(struct Tensor *a) {
 	return (inv);
 }
 
-struct Tensor		*inverse(struct Tensor *a) {
+struct Tensor		*inverse(struct Tensor *tensor) {
 	struct Tensor	*aug, *inv;
-	assert_tensor_is_square(a);
-	if ((aug = augmented_matrix(a)) == NULL)
+	assert_tensor_is_square(tensor);
+	if ((aug = augmented_matrix(tensor)) == NULL)
 		return (NULL);
 	assert_invertible(rref_(aug));
 	if ((inv = extract_inverse_from_aug(aug)) == NULL) {

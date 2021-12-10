@@ -3,35 +3,38 @@
 
 #include "tensor.h"
 
-struct Tensor	*linear_combination(struct Tensor *a, struct Tensor *b);
+struct Tensor	*linear_combination(struct Tensor *lhs, struct Tensor *rhs);
 
-struct Tensor	*lerp(struct Tensor *a, struct Tensor *b, float k);
+struct Tensor	*lerp(struct Tensor *lhs, struct Tensor *rhs, float k);
 
-struct Tensor	*cross(struct Tensor *a, struct Tensor *b);
+struct Tensor	*cross(struct Tensor *lhs, struct Tensor *rhs);
 
-struct Tensor	*mm(struct Tensor *a, struct Tensor *b);
+struct Tensor	*mm(struct Tensor *lhs, struct Tensor *rhs);
 
-struct Tensor	*transpose(struct Tensor *a);
+struct Tensor	*transpose(struct Tensor *tensor);
 
-struct Tensor	*rref(struct Tensor *a);
-struct Tensor	*rref_(struct Tensor *a);
+struct Tensor	*ref(struct Tensor *tensor);
+struct Tensor	*ref_(struct Tensor *tensor);
 
-struct Tensor	*inverse(struct Tensor *a);
+struct Tensor	*rref(struct Tensor *tensor);
+struct Tensor	*rref_(struct Tensor *tensor);
 
-float		dot(struct Tensor *a, struct Tensor *b);
+struct Tensor	*inverse(struct Tensor *tensor);
 
-float		norm(struct Tensor *a);
+float		dot(struct Tensor *lhs, struct Tensor *rhs);
 
-float		norm_1(struct Tensor *a);
+float		norm(struct Tensor *tensor);
 
-float		norm_inf(struct Tensor *a);
+float		norm_1(struct Tensor *tensor);
 
-float		angle(struct Tensor *a, struct Tensor *b);
+float		norm_inf(struct Tensor *tensor);
 
-float		trace(struct Tensor *a);
+float		angle(struct Tensor *lhs, struct Tensor *rhs);
 
-float		det(struct Tensor *a);
+float		trace(struct Tensor *tensor);
 
-uint32_t	rank(struct Tensor *a);
+float		det(struct Tensor *tensor);
+
+uint32_t	rank(struct Tensor *tensor);
 
 #endif /* __LINALG_H__ */

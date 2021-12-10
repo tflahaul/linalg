@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 void	assert_tensor_broadcastable(struct Tensor *a, struct Tensor *b) {
 	if (((a->shape[0] == b->shape[0]) && (a->shape[1] == b->shape[1])) == 0) {
@@ -43,8 +44,8 @@ void	assert_tensor_mm_able(struct Tensor *a, struct Tensor *b) {
 
 void	assert_invertible(struct Tensor *a) {
 	for (uint32_t index = 0; index < a->shape[0]; index++) {
-		if (a->data[(index * a->shape[1]) + index] == 0.0) {
-			fprintf(stderr, "error: matrix is singular.\n");
+		if (fabsf(a->data[(index * a->shape[1]) + index]) < 1e-8) {
+			fprintf(stderr, "error: matrix is singular\n");
 			exit(EXIT_FAILURE);
 		}
 	}

@@ -43,11 +43,11 @@ static float		gaussian_elimination_det(struct Tensor *a) {
 	return (p);
 }
 
-static float		det2x2(struct Tensor *a) {
+static inline float	det2x2(struct Tensor *a) {
 	return (a->data[0] * a->data[3]) - (a->data[1] * a->data[2]);
 }
 
-static float		det3x3(struct Tensor *a) {
+static inline float	det3x3(struct Tensor *a) {
 	return ((a->data[0] * a->data[4] * a->data[8]) + (a->data[1] * a->data[5] * a->data[6]) +\
 		(a->data[2] * a->data[3] * a->data[7]) - (a->data[0] * a->data[5] * a->data[7]) -\
 		(a->data[1] * a->data[3] * a->data[8]) - (a->data[2] * a->data[4] * a->data[6]));
@@ -66,13 +66,13 @@ static float		detnxn(struct Tensor *a) {
 	return (determinant * sig);
 }
 
-float		det(struct Tensor *a) {
-	assert_tensor_is_square(a);
-	if (a->shape[0] == 1)
-		return (a->data[0]);
-	if (a->shape[0] == 2)
-		return det2x2(a);
-	if (a->shape[0] == 3)
-		return det3x3(a);
-	return (detnxn(a));
+float		det(struct Tensor *tensor) {
+	assert_tensor_is_square(tensor);
+	if (tensor->shape[0] == 1)
+		return (tensor->data[0]);
+	if (tensor->shape[0] == 2)
+		return det2x2(tensor);
+	if (tensor->shape[0] == 3)
+		return det3x3(tensor);
+	return (detnxn(tensor));
 }

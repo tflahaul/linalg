@@ -1,11 +1,11 @@
 #include "assert.h"
 #include "tensor.h"
 
-float		dot(struct Tensor *a, struct Tensor *b) {
+float		dot(struct Tensor *lhs, struct Tensor *rhs) {
 	float	out = 0.;
-	assert_tensor_is_vector(a);
-	assert_tensor_broadcastable(a, b);
-	for (uint32_t index = 0; index < TENSOR_NUMEL(a); index++)
-		out = out + (a->data[index] * b->data[index]);
+	assert_tensor_is_vector(lhs);
+	assert_tensor_broadcastable(lhs, rhs);
+	for (uint32_t index = 0; index < TENSOR_NUMEL(lhs); index++)
+		out = out + (lhs->data[index] * rhs->data[index]);
 	return (out);
 }

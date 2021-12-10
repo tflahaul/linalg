@@ -9,13 +9,13 @@ static inline void	__ops_cpu_mm(struct Tensor *dst, struct Tensor *a, struct Ten
 				dst->data[i * b->shape[1] + j] += a->data[i * b->shape[1] + k] * b->data[k * b->shape[1] + j];
 }
 
-struct Tensor		*mm(struct Tensor *a, struct Tensor *b) {
+struct Tensor		*mm(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	if ((b->shape[0] == 1) || (b->shape[1] == 1))
-		return (linear_combination(a, b));
-	assert_tensor_mm_able(a, b);
-	if ((out = tensor_init_constant(a->shape[0], b->shape[1], 0.)) == NULL)
+	if ((rhs->shape[0] == 1) || (rhs->shape[1] == 1))
+		return (linear_combination(lhs, rhs));
+	assert_tensor_mm_able(lhs, rhs);
+	if ((out = tensor_init_constant(lhs->shape[0], rhs->shape[1], 0.)) == NULL)
 		return (NULL);
-	__ops_cpu_mm(out, a, b);
+	__ops_cpu_mm(out, lhs, rhs);
 	return (out);
 }

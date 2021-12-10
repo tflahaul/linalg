@@ -6,10 +6,10 @@ static inline void	__ops_cpu_transpose(struct Tensor *dst, struct Tensor *a) {
 			dst->data[i * a->shape[0] + j] = a->data[j * a->shape[1] + i];
 }
 
-struct Tensor		*transpose(struct Tensor *a) {
+struct Tensor		*transpose(struct Tensor *tensor) {
 	struct Tensor	*out;
-	if ((out = tensor_init(a->shape[1], a->shape[0])) == NULL)
+	if ((out = tensor_init(tensor->shape[1], tensor->shape[0])) == NULL)
 		return (NULL);
-	__ops_cpu_transpose(out, a);
+	__ops_cpu_transpose(out, tensor);
 	return (out);
 }

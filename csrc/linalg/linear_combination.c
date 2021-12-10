@@ -6,10 +6,10 @@ static inline void	__ops_cpu_linear_comb(struct Tensor *dst, struct Tensor *a, s
 			dst->data[i] += (b->data[j] * a->data[(j * a->shape[1]) + i]);
 }
 
-struct Tensor		*linear_combination(struct Tensor *a, struct Tensor *coefs) {
+struct Tensor		*linear_combination(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	if ((out = tensor_init_constant(a->shape[1], 1, 0.)) == NULL)
+	if ((out = tensor_init_constant(lhs->shape[1], 1, 0.)) == NULL)
 		return (NULL);
-	__ops_cpu_linear_comb(out, a, coefs);
+	__ops_cpu_linear_comb(out, lhs, rhs);
 	return (out);
 }

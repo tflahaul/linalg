@@ -16,28 +16,28 @@ static inline void	__ops_cpu_scl(struct Tensor *dst, struct Tensor *a, float f) 
 		dst->data[index] = a->data[index] * f;
 }
 
-struct Tensor		*add(struct Tensor *a, struct Tensor *b) {
+struct Tensor		*add(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	assert_tensor_broadcastable(a, b);
-	if ((out = tensor_init(a->shape[0], a->shape[1])) == NULL)
+	assert_tensor_broadcastable(lhs, rhs);
+	if ((out = tensor_init(lhs->shape[0], lhs->shape[1])) == NULL)
 		return (NULL);
-	__ops_cpu_add(out, a, b);
+	__ops_cpu_add(out, lhs, rhs);
 	return (out);
 }
 
-struct Tensor		*sub(struct Tensor *a, struct Tensor *b) {
+struct Tensor		*sub(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	assert_tensor_broadcastable(a, b);
-	if ((out = tensor_init(a->shape[0], a->shape[1])) == NULL)
+	assert_tensor_broadcastable(lhs, rhs);
+	if ((out = tensor_init(lhs->shape[0], lhs->shape[1])) == NULL)
 		return (NULL);
-	__ops_cpu_sub(out, a, b);
+	__ops_cpu_sub(out, lhs, rhs);
 	return (out);
 }
 
-struct Tensor		*scl(struct Tensor *a, float f) {
+struct Tensor		*scl(struct Tensor *tensor, float f) {
 	struct Tensor	*out;
-	if ((out = tensor_init(a->shape[0], a->shape[1])) == NULL)
+	if ((out = tensor_init(tensor->shape[0], tensor->shape[1])) == NULL)
 		return (NULL);
-	__ops_cpu_scl(out, a, f);
+	__ops_cpu_scl(out, tensor, f);
 	return (out);
 }

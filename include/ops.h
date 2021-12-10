@@ -3,8 +3,8 @@
 
 #include "tensor.h"
 
-struct Tensor	*add(struct Tensor *a, struct Tensor *b);
-struct Tensor	*sub(struct Tensor *a, struct Tensor *b);
-struct Tensor	*scl(struct Tensor *a, float f);
+struct Tensor	*add(struct Tensor *lhs, struct Tensor *rhs);
+struct Tensor	*sub(struct Tensor *lhs, struct Tensor *rhs);
+struct Tensor	*scl(struct Tensor *tensor, float f);
 
 #endif /* __OPS_H__ */
