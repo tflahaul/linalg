@@ -1,3 +1,4 @@
+#include "assert.h"
 #include "tensor.h"
 
 #include <string.h>
@@ -7,20 +8,16 @@
 
 struct Tensor		*tensor_init(uint32_t n, uint32_t m) {
 	struct Tensor	*tensor;
-	if ((tensor = (struct Tensor *)malloc(sizeof(struct Tensor))) == NULL)
-		return (NULL);
-	uint32_t items = (n * m);
-	if ((tensor->data = (float *)malloc(sizeof(float) * items)) == NULL)
-		return (NULL);
+	uint32_t const	items = (n * m);
+	__assert_non_null_tensor((tensor = (struct Tensor *)malloc(sizeof(struct Tensor))));
+	__assert_non_null_tensor((tensor->data = (float *)malloc(sizeof(float) * items)));
 	tensor->shape[0] = n;
 	tensor->shape[1] = m;
 	return (tensor);
 }
 
 struct Tensor		*tensor_init_random(uint32_t n, uint32_t m) {
-	struct Tensor	*tensor;
-	if ((tensor = tensor_init(n, m)) == NULL)
-		return (NULL);
+	struct Tensor	*tensor = tensor_init(n, m);
 	srand((uint32_t)time(NULL) + rand());
 	for (uint32_t index = 0; index < TENSOR_NUMEL(tensor); index++)
 		tensor->data[index] = (float)rand() / RAND_MAX;
@@ -28,26 +25,20 @@ struct Tensor		*tensor_init_random(uint32_t n, uint32_t m) {
 }
 
 struct Tensor		*tensor_init_constant(uint32_t n, uint32_t m, float x) {
-	struct Tensor	*tensor;
-	if ((tensor = tensor_init(n, m)) == NULL)
-		return (NULL);
+	struct Tensor	*tensor = tensor_init(n, m);
 	for (uint32_t index = 0; index < (n * m); index++)
 		tensor->data[index] = x;
 	return (tensor);
 }
 
 struct Tensor		*tensor_init_from_array(float *data, uint32_t r, uint32_t c) {
-	struct Tensor	*tensor;
-	if ((tensor = tensor_init(r, c)) == NULL)
-		return (NULL);
+	struct Tensor	*tensor = tensor_init(r, c);
 	memcpy(tensor->data, data, (sizeof(float) * r * c));
 	return (tensor);
 }
 
 struct Tensor		*tensor_init_from_tensor(struct Tensor *src) {
-	struct Tensor	*tensor;
-	if ((tensor = tensor_init(src->shape[0], src->shape[1])) == NULL)
-		return (NULL);
+	struct Tensor	*tensor = tensor_init(src->shape[0], src->shape[1]);
 	memcpy(tensor->data, src->data, (sizeof(float) * TENSOR_NUMEL(src)));
 	return (tensor);
 }

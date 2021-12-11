@@ -18,26 +18,23 @@ static inline void	__ops_cpu_scl(struct Tensor *dst, struct Tensor *a, float f) 
 
 struct Tensor		*add(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	assert_tensor_broadcastable(lhs, rhs);
-	if ((out = tensor_init(lhs->shape[0], lhs->shape[1])) == NULL)
-		return (NULL);
+	__assert_broadcastable(lhs, rhs);
+	out = tensor_init(lhs->shape[0], lhs->shape[1]);
 	__ops_cpu_add(out, lhs, rhs);
 	return (out);
 }
 
 struct Tensor		*sub(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	assert_tensor_broadcastable(lhs, rhs);
-	if ((out = tensor_init(lhs->shape[0], lhs->shape[1])) == NULL)
-		return (NULL);
+	__assert_broadcastable(lhs, rhs);
+	out = tensor_init(lhs->shape[0], lhs->shape[1]);
 	__ops_cpu_sub(out, lhs, rhs);
 	return (out);
 }
 
 struct Tensor		*scl(struct Tensor *tensor, float f) {
 	struct Tensor	*out;
-	if ((out = tensor_init(tensor->shape[0], tensor->shape[1])) == NULL)
-		return (NULL);
+	out = tensor_init(tensor->shape[0], tensor->shape[1]);
 	__ops_cpu_scl(out, tensor, f);
 	return (out);
 }

@@ -3,9 +3,7 @@
 #include "linalg.h"
 
 static struct Tensor	*augmented_matrix(struct Tensor *a) {
-	struct Tensor	*aug;
-	if ((aug = tensor_init_constant(a->shape[0], 2 * a->shape[1], 0.)) == NULL)
-		return (NULL);
+	struct Tensor	*aug = tensor_init_constant(a->shape[0], 2 * a->shape[1], 0.);
 	for (uint32_t i = 0; i < a->shape[0]; i++) {
 		for (uint32_t j = 0; j < a->shape[1]; j++)
 			aug->data[i * aug->shape[1] + j] = a->data[i * a->shape[1] + j];
@@ -15,9 +13,7 @@ static struct Tensor	*augmented_matrix(struct Tensor *a) {
 }
 
 static struct Tensor	*extract_inverse_from_aug(struct Tensor *a) {
-	struct Tensor	*inv;
-	if ((inv = tensor_init(a->shape[0], (0.5 * a->shape[1]))) == NULL)
-		return (NULL);
+	struct Tensor	*inv = tensor_init(a->shape[0], (0.5 * a->shape[1]));
 	for (uint32_t i = 0; i < inv->shape[0]; i++)
 		for (uint32_t j = 0; j < inv->shape[1]; j++)
 			inv->data[i * a->shape[0] + j] = a->data[i * a->shape[1] + j + inv->shape[1]];
@@ -26,14 +22,10 @@ static struct Tensor	*extract_inverse_from_aug(struct Tensor *a) {
 
 struct Tensor		*inverse(struct Tensor *tensor) {
 	struct Tensor	*aug, *inv;
-	assert_tensor_is_square(tensor);
-	if ((aug = augmented_matrix(tensor)) == NULL)
-		return (NULL);
-	assert_invertible(rref_(aug));
-	if ((inv = extract_inverse_from_aug(aug)) == NULL) {
-		tensor_free(aug);
-		return (NULL);
-	}
+	__assert_tensor_is_square(tensor);
+	aug = augmented_matrix(tensor);
+	__assert_tensor_invertible(rref_(aug));
+	inv = extract_inverse_from_aug(aug);
 	tensor_free(aug);
 	return (inv);
 }

@@ -1,4 +1,4 @@
-NAME		=	linalg
+NAME		=	linalg.a
 
 #######   DIRECTORIES   #######
 SRCDIR		=	csrc
@@ -34,8 +34,9 @@ YELLOW		=	\033[0;33m
 all	: $(NAME)
 
 $(NAME)	: $(OBJS)
-	@printf "$(YELLOW)%-45s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CCFLAGS) $(INCFLAG) $(OBJS) -o $@
+	@printf "$(YELLOW)%-45s$(STD)" "Building archive $@ ..."
+	@ar -rcL $@ $(OBJS)
+	@ranlib $@
 	@echo "$(GREEN)DONE$(STD)"
 
 -include $(DEPENDS)

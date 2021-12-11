@@ -1,6 +1,7 @@
+#include "assert.h"
 #include "tensor.h"
 
-#include <math.h>
+#include <math.h> // needed for fasbf
 
 static inline void	swap(struct Tensor *a, uint32_t x, uint32_t y) {
 	float		tmp;
@@ -39,9 +40,7 @@ static void		gaussian_elimination(struct Tensor *a) {
 }
 
 struct Tensor		*ref(struct Tensor *tensor) {
-	struct Tensor	*out;
-	if ((out = tensor_init(tensor->shape[0], tensor->shape[1])) == NULL)
-		return (NULL);
+	struct Tensor	*out = tensor_init(tensor->shape[0], tensor->shape[1]);
 	gaussian_elimination(out);
 	return (out);
 }

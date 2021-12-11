@@ -1,6 +1,7 @@
+#include "assert.h"
 #include "tensor.h"
 
-#include <math.h>
+#include <math.h> // fabsf
 
 static void		swap(struct Tensor *mat, uint32_t a, uint32_t b) {
 	float		tmp;
@@ -45,9 +46,7 @@ static void		gauss_jordan_elimination(struct Tensor *a) {
 }
 
 struct Tensor		*rref(struct Tensor *tensor) {
-	struct Tensor	*out;
-	if ((out = tensor_init_from_tensor(tensor)) == NULL)
-		return (NULL);
+	struct Tensor	*out = tensor_init_from_tensor(tensor);
 	gauss_jordan_elimination(out);
 	return (out);
 }

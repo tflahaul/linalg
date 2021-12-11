@@ -1,6 +1,6 @@
 #include "tensor.h"
 
-#include <math.h> // for powf
+#include <math.h> // for powf & fabsf
 
 float		norm(struct Tensor *tensor) {
 	float	norm = powf(tensor->data[0], 2.);

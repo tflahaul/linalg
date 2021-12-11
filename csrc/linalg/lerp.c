@@ -8,9 +8,8 @@ static inline void	__ops_cpu_lerp(struct Tensor *dst, struct Tensor *a, struct T
 
 struct Tensor		*lerp(struct Tensor *lhs, struct Tensor *rhs, float k) {
 	struct Tensor	*out;
-	assert_tensor_broadcastable(lhs, rhs);
-	if ((out = tensor_init(lhs->shape[0], lhs->shape[1])) == NULL)
-		return (NULL);
+	__assert_broadcastable(lhs, rhs);
+	out = tensor_init(lhs->shape[0], lhs->shape[1]);
 	__ops_cpu_lerp(out, lhs, rhs, k);
 	return (out);
 }

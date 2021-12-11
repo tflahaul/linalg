@@ -1,3 +1,4 @@
+#include "assert.h"
 #include "tensor.h"
 
 static inline void	__ops_cpu_transpose(struct Tensor *dst, struct Tensor *a) {
@@ -7,9 +8,7 @@ static inline void	__ops_cpu_transpose(struct Tensor *dst, struct Tensor *a) {
 }
 
 struct Tensor		*transpose(struct Tensor *tensor) {
-	struct Tensor	*out;
-	if ((out = tensor_init(tensor->shape[1], tensor->shape[0])) == NULL)
-		return (NULL);
+	struct Tensor	*out = tensor_init(tensor->shape[1], tensor->shape[0]);
 	__ops_cpu_transpose(out, tensor);
 	return (out);
 }

@@ -1,7 +1,7 @@
 #include "assert.h"
 #include "tensor.h"
 
-#include <math.h>
+#include <math.h> // fabsf
 
 static inline void	swap(struct Tensor *a, uint32_t x, uint32_t y) {
 	float		tmp;
@@ -54,11 +54,9 @@ static inline float	det3x3(struct Tensor *a) {
 }
 
 static float		detnxn(struct Tensor *a) {
-	struct Tensor	*ref;
 	float		sig;
 	float		determinant = 1.0;
-	if ((ref = tensor_init_from_tensor(a)) == NULL)
-		return (0.);
+	struct Tensor	*ref = tensor_init_from_tensor(a);
 	sig = gaussian_elimination_det(ref);
 	for (uint32_t index = 0; index < ref->shape[0]; index++)
 		determinant *= ref->data[index * ref->shape[1] + index];
@@ -67,7 +65,7 @@ static float		detnxn(struct Tensor *a) {
 }
 
 float		det(struct Tensor *tensor) {
-	assert_tensor_is_square(tensor);
+	__assert_tensor_is_square(tensor);
 	if (tensor->shape[0] == 1)
 		return (tensor->data[0]);
 	if (tensor->shape[0] == 2)

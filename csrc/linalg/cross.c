@@ -11,10 +11,9 @@ static inline void	__ops_cpu_cross(struct Tensor *dst, struct Tensor *a, struct 
 
 struct Tensor		*cross(struct Tensor *lhs, struct Tensor *rhs) {
 	struct Tensor	*out;
-	assert_tensor_has_dim(lhs, 3);
-	assert_tensor_broadcastable(lhs, rhs);
-	if ((out = tensor_init(lhs->shape[0], 3)) == NULL)
-		return (NULL);
+	__assert_tensor_has_dim(lhs, 3);
+	__assert_broadcastable(lhs, rhs);
+	out = tensor_init(lhs->shape[0], 3);
 	__ops_cpu_cross(out, lhs, rhs);
 	return (out);
 }
