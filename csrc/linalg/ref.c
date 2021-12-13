@@ -46,7 +46,6 @@ struct Tensor		*ref(struct Tensor *tensor) {
 }
 
 struct Tensor		*ref_(struct Tensor *tensor) {
-	struct Tensor	*out = tensor;
-	gaussian_elimination(out);
-	return (out);
+	gaussian_elimination(tensor);
+	return (tensor);
 }

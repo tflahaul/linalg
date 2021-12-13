@@ -2,7 +2,7 @@
 #include "tensor.h"
 #include "linalg.h"
 
-#include <math.h>
+#include <math.h> // fabsf
 
 uint32_t		rank(struct Tensor *tensor) {
 	uint32_t	diag = 0;

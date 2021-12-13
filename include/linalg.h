@@ -21,6 +21,8 @@ struct Tensor	*rref_(struct Tensor *tensor);
 
 struct Tensor	*inverse(struct Tensor *tensor);
 
+struct Tensor	*flip(struct Tensor *tensor);
+
 float		dot(struct Tensor *lhs, struct Tensor *rhs);
 
 float		norm(struct Tensor *tensor);

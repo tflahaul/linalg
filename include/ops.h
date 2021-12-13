@@ -7,4 +7,6 @@ struct Tensor	*add(struct Tensor *lhs, struct Tensor *rhs);
 struct Tensor	*sub(struct Tensor *lhs, struct Tensor *rhs);
 struct Tensor	*scl(struct Tensor *tensor, float f);
 
+struct Tensor	*relu(struct Tensor *tensor);
+
 #endif /* __OPS_H__ */

@@ -52,7 +52,6 @@ struct Tensor		*rref(struct Tensor *tensor) {
 }
 
 struct Tensor		*rref_(struct Tensor *tensor) {
-	struct Tensor	*out = tensor;
-	gauss_jordan_elimination(out);
-	return (out);
+	gauss_jordan_elimination(tensor);
+	return (tensor);
 }
