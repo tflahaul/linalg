@@ -1,66 +1,34 @@
 # linalg
-### linear_combination
-```struct Tensor *linear_combination(struct Tensor *lhs, struct Tensor *rhs);```<br/>
-Linear combination of the matrix `a` and `coefs`, a vector of scalars.<br/>
 
-### lerp
-```struct Tensor *lerp(struct Tensor *lhs, struct Tensor *rhs, float k);```<br/>
-Linear interpolation of the `a` and `b` matrices based on `k`, a scalar.<br/>
+Linear algebra C library (with tensors)
 
-### dot
-```float dot(struct Tensor *lhs, struct Tensor *rhs);```<br/>
-Dot product of two given vectors. Different than numpy's dot or python @ operator.<br/>
+### ops
 
-### norms
-```float norm_1(struct Tensor *tensor);```<br/>
-```float norm(struct Tensor *tensor);```<br/>
-```float norm_inf(struct Tensor *tensor);```<br/>
-Functions to compute different kinds of norms on a given vector.
+```
+add, sub, scl      # binary ops
+relu               # unary ops
+```
 
-### angle
-```float angle(struct Tensor *lhs, struct Tensor *rhs);```<br/>
-Returns the cosine of the angle between the two given vectors.
+### linalg
 
-### cross
-```struct Tensor *cross(struct Tensor *lhs, struct Tensor *rhs);```<br/>
-Returns the cross product of `a` and `b`.<br/>
+Library includes 17 linear algebra functions :
 
-### mm
-```struct Tensor *mm(struct Tensor *lhs, struct Tensor *rhs);```<br/>
-Matrix multiplication. Similar to numpy's dot or python @ operator.
-
-### trace
-```float trace(struct Tensor *tensor);```<br/>
-Returns the trace of the given square matrix.
-
-### transpose
-```struct Tensor *transpose(struct Tensor *tensor);```<br/>
-Flips `a` over it's diagonal.
-
-### ref
-```struct Tensor *ref(struct Tensor *tensor)```<br/>
-Returns the row echelon form of the given matrix.
-
-### ref_
-```struct Tensor *ref_(struct Tensor *tensor)```<br/>
-`ref` but in-place.
-
-### rref
-```struct Tensor *rref(struct Tensor *tensor);```<br/>
-Returns the reduced row echelon form of the given matrix.
-
-### rref_
-```struct Tensor *rref_(struct Tensor *tensor);```<br/>
-`rref` but in-place.
-
-### rank
-```unsigned int rank(struct Tensor *tensor);```<br/>
-Returns the rank of the given matrix.
-
-### det
-```float det(struct Tensor *tensor);```<br/>
-Returns the determinant of the given square matrix.
-
-### inverse
-```struct Tensor *inverse(struct Tensor *tensor);```<br/>
-If the given matrix is invertible, returns its inverse.
+```
+linear_combination # linear combination of a tensor and a vector of scalars
+lerp               # linear interpolation of two tensors based on a scalar
+dot                # dot product of two given VECTORS
+norm_1             # manhattan norm
+norm               # euclidean norm
+norm_inf           # supremum norm
+angle              # cosine of the angle between two given vectors
+cross              # cross product of two tensors both of shape nx3
+mm                 # matrix multiplication
+trace              # returns the trace of a square matrix
+transpose          # flips a tensor over its diagonal
+flip               # mirrors a tensor
+ref                # returns the row echelon form of the given matrix
+rref               # returns the reduced row echelon form of the given matrix
+rank               # rank of the matrix
+det                # computes the determinant of a square matrix
+inverse            # returns the inverse of a non-singular square matrix
+```
