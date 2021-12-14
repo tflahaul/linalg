@@ -37,3 +37,8 @@ struct Tensor		*scl(struct Tensor *tensor, float f) {
 	__ops_scl_cpu(out, tensor, f);
 	return (out);
 }
+
+struct Tensor		*scl_(struct Tensor *tensor, float f) {
+	__ops_scl_cpu(tensor, tensor, f);
+	return (tensor);
+}

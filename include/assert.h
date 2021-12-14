@@ -29,7 +29,7 @@ static inline int	invertible(struct Tensor *a) {
 	return (1);
 }
 
-#define	__assert_non_null_tensor(p)	{assert(((p) != NULL), S_MEM_FAIL, __FILE__, __LINE__);}
+#define	__assert_non_null(p)		{assert(((p) != NULL), S_MEM_FAIL, __FILE__, __LINE__);}
 #define __assert_broadcastable(a, b)	{assert(((a)->shape[0] == (b)->shape[0]) && ((a)->shape[1] == (b)->shape[1]), S_BROAD_ERR, __FILE__, __LINE__);}
 #define __assert_tensor_is_vector(a)	{assert(((a)->shape[0] == 1) || ((a)->shape[1] == 1), S_VEC_ERR, __FILE__, __LINE__);}
 #define __assert_tensor_is_square(a)	{assert(((a)->shape[0] == (a)->shape[1]), S_SQUARE_ERR, __FILE__, __LINE__);}

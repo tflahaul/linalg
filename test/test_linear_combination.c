@@ -33,7 +33,7 @@ int		main(void) {
 	tensor_free(a);
 	tensor_free(b);
 
-// expected :  tensor([[ 10.0000, 0.0000], 230.0000]])
+// expected :  tensor([[10.0000, 0.0000, 230.0000]])
 
 	printf("\n---------------------------------------------\n");
 	a = tensor_init_random(3, 3);
@@ -46,5 +46,6 @@ int		main(void) {
 	tensor_free(b);
 
 // expected :   error because of shapes
+
 	return (0);
 }

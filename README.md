@@ -6,7 +6,8 @@ Linear algebra C library (with tensors)
 
 ```
 add, sub, scl      # binary ops
-relu               # unary ops
+relu, softmax      # unary ops
+sdpa               # scaled dot-product attention
 ```
 
 ### linalg

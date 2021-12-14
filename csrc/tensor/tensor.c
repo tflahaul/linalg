@@ -8,9 +8,8 @@
 
 struct Tensor		*tensor_init(uint32_t n, uint32_t m) {
 	struct Tensor	*tensor;
-	uint32_t const	items = (n * m);
-	__assert_non_null_tensor((tensor = (struct Tensor *)malloc(sizeof(struct Tensor))));
-	__assert_non_null_tensor((tensor->data = (float *)malloc(sizeof(float) * items)));
+	__assert_non_null((tensor = (struct Tensor *)malloc(sizeof(struct Tensor))));
+	__assert_non_null((tensor->data = (float *)malloc(sizeof(float) * n * m)));
 	tensor->shape[0] = n;
 	tensor->shape[1] = m;
 	return (tensor);
