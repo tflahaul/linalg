@@ -12,12 +12,10 @@ static struct Tensor	*augmented_matrix(struct Tensor *a) {
 	return (aug);
 }
 
-static struct Tensor	*extract_inverse_from_aug(struct Tensor *a) {
-	struct Tensor	*inv = tensor_init(a->shape[0], (0.5 * a->shape[1]));
-	for (uint32_t i = 0; i < inv->shape[0]; i++)
-		for (uint32_t j = 0; j < inv->shape[1]; j++)
-			inv->data[i * a->shape[0] + j] = a->data[i * a->shape[1] + j + inv->shape[1]];
-	return (inv);
+static inline void	extract_inverse_from_aug(struct Tensor *dst, struct Tensor *aug) {
+	for (uint32_t i = 0; i < dst->shape[0]; i++)
+		for (uint32_t j = 0; j < dst->shape[1]; j++)
+			dst->data[i * dst->shape[0] + j] = aug->data[i * aug->shape[1] + j + dst->shape[1]];
 }
 
 struct Tensor		*inverse(struct Tensor *tensor) {
@@ -25,7 +23,18 @@ struct Tensor		*inverse(struct Tensor *tensor) {
 	__assert_tensor_is_square(tensor);
 	aug = augmented_matrix(tensor);
 	__assert_tensor_invertible(rref_(aug));
-	inv = extract_inverse_from_aug(aug);
+	inv = tensor_init(tensor->shape[0], tensor->shape[1]);
+	extract_inverse_from_aug(inv, aug);
 	tensor_free(aug);
 	return (inv);
+}
+
+struct Tensor		*inverse_(struct Tensor *tensor) {
+	struct Tensor	*aug;
+	__assert_tensor_is_square(tensor);
+	aug = augmented_matrix(tensor);
+	__assert_tensor_invertible(rref_(aug));
+	extract_inverse_from_aug(tensor, aug);
+	tensor_free(aug);
+	return (tensor);
 }

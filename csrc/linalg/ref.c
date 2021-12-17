@@ -40,7 +40,7 @@ static void		gaussian_elimination(struct Tensor *a) {
 }
 
 struct Tensor		*ref(struct Tensor *tensor) {
-	struct Tensor	*out = tensor_init(tensor->shape[0], tensor->shape[1]);
+	struct Tensor	*out = tensor_init_from_tensor(tensor);
 	gaussian_elimination(out);
 	return (out);
 }

@@ -12,7 +12,7 @@ sdpa               # scaled dot-product attention
 
 ### linalg
 
-Library includes 17 linear algebra functions :
+Library includes 18 linear algebra functions :
 
 ```
 linear_combination # linear combination of a tensor and a vector of scalars
@@ -32,4 +32,5 @@ rref               # returns the reduced row echelon form of the given matrix
 rank               # rank of the matrix
 det                # computes the determinant of a square matrix
 inverse            # returns the inverse of a non-singular square matrix
+solve              # solves a system of linear equations
 ```
