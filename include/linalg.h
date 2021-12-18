@@ -6,6 +6,7 @@
 struct Tensor	*linear_combination(struct Tensor *lhs, struct Tensor *rhs);
 struct Tensor	*lerp(struct Tensor *lhs, struct Tensor *rhs, float k);
 struct Tensor	*cross(struct Tensor *lhs, struct Tensor *rhs);
+struct Tensor	*outer(struct Tensor *lhs, struct Tensor *rhs);
 struct Tensor	*mm(struct Tensor *lhs, struct Tensor *rhs);
 struct Tensor	*transpose(struct Tensor *tensor);
 struct Tensor	*ref(struct Tensor *tensor);

@@ -12,6 +12,8 @@ int			main(void) {
 	float		d2[] = {1, 1, 1, 0, 2, 5, 2, 5, -1};
 	float		d3[] = {6, -4, 27};
 
+	float		d4[] = {10, 0, -1, 1};
+
 	struct Tensor	*a = tensor_init_from_array(d0, 2, 2);
 	struct Tensor	*b = tensor_init_from_array(d1, 1, 2);
 	tensor_print(a);
@@ -34,6 +36,18 @@ int			main(void) {
 	tensor_free(b);
 
 // expected : tensor([[5.0000, 3.0000, -2.0000]])
+
+	printf("\n---------------------------------------------\n");
+	a = tensor_init_from_array(d4, 2, 2);
+	b = tensor_init_constant(1, 2, 1.0);
+	tensor_print(a);
+	tensor_print(b);
+	printf("\n>>> system solution:\n");
+	tensor_print(solve(a, b));
+	tensor_free(a);
+	tensor_free(b);
+
+// expected : tensor([[0.1000, 1.1000]])
 
 	printf("\n---------------------------------------------\n");
 	a = tensor_init_constant(3, 3, 1.0);

@@ -2,12 +2,12 @@
 #include "linalg.h"
 #include "tensor.h"
 
-struct Tensor		*solve(struct Tensor *a, struct Tensor *b) {
-	struct Tensor	*at, *solution;
-	__assert_tensor_is_vector(b);
-	__assert_tensor_has_dim(a, TENSOR_NUMEL(b));
-	at = transpose(a);
-	solution = mm(inverse_(at), b);
-	tensor_free(at);
+struct Tensor		*solve(struct Tensor *lhs, struct Tensor *rhs) {
+	struct Tensor	*trans, *solution;
+	__assert_tensor_is_vector(rhs);
+	__assert_tensor_has_dim(lhs, TENSOR_NUMEL(rhs));
+	trans = transpose(lhs);
+	solution = linear_combination(inverse_(trans), rhs);
+	tensor_free(trans);
 	return (solution);
 }
