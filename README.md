@@ -7,6 +7,7 @@ Linear algebra C library (with tensors)
 ```
 add, sub, scl      # binary ops
 relu, softmax      # unary ops
+conv1d             # 1D convolution over a vector
 sdpa               # scaled dot-product attention
 ```
 

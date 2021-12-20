@@ -16,7 +16,7 @@ struct Tensor	*rref_(struct Tensor *tensor);
 struct Tensor	*inverse(struct Tensor *tensor);
 struct Tensor	*inverse_(struct Tensor *tensor);
 struct Tensor	*flip(struct Tensor *tensor);
-struct Tensor	*solve(struct Tensor *a, struct Tensor *b);
+struct Tensor	*solve(struct Tensor *lhs, struct Tensor *rhs);
 float		dot(struct Tensor *lhs, struct Tensor *rhs);
 float		norm(struct Tensor *tensor);
 float		norm_1(struct Tensor *tensor);

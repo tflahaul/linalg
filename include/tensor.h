@@ -5,10 +5,6 @@
 
 #define MAX_SUPPORTED_DIMS 2
 
-#ifndef NULL
-# define NULL (void *)0
-#endif /* NULL */
-
 struct Tensor {
 	uint32_t	shape[MAX_SUPPORTED_DIMS];
 	float		*data;
