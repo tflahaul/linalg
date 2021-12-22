@@ -5,15 +5,17 @@
 
 #include <math.h> // sqrtf
 
-struct Tensor		*conv1d(struct Tensor *tensor, struct Tensor *kernel, float bias) {
+struct Tensor		*conv1d(struct Tensor *tensor, struct Tensor *kernel,
+				float const bias, uint32_t const stride) {
 	struct Tensor	*out;
 	__assert_tensor_is_vector(tensor);
 	__assert_tensor_is_vector(kernel);
 	__assert_conv1d_size(tensor, kernel);
-	out = tensor_init_constant(1, tensor->shape[1] - (kernel->shape[1] - 1), bias);
+	__assert_non_zero_stride(stride);
+	out = tensor_init_constant(1, ((tensor->shape[1] - kernel->shape[1] + stride) / stride), bias);
 	for (uint32_t index = 0; index < out->shape[1]; index++)
 		for (uint32_t k = 0; k < kernel->shape[1]; k++)
-			out->data[index] += (tensor->data[index + k] * kernel->data[k]);
+			out->data[index] += (tensor->data[(index * stride) + k] * kernel->data[k]);
 	return (out);
 }
 

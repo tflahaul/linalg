@@ -14,20 +14,26 @@ int			main(void) {
 	struct Tensor	*b = tensor_init_from_array(d1, 1, 3);
 	tensor_print(a);
 	tensor_print(b);
-	printf("\n>>> conv1d(bias=0): ");
-	tensor_print(conv1d(a, b, 0.0));
-	tensor_free(a);
-	tensor_free(b);
+	printf("\n>>> conv1d(bias=0, stride=1): ");
+	tensor_print(conv1d(a, b, 0, 1));
 
 // expected : tensor([[2.0000, 4.0000, 6.0000, 8.0000, 10.0000, 12.0000, 14.0000, 16.0000]])
+
+	printf("\n---------------------------------------------\n");
+	tensor_print(a);
+	tensor_print(b);
+	printf("\n>>> conv1d(bias=0, stride=2): ");
+	tensor_print(conv1d(a, b, 0, 2));
+
+// expected : tensor([[2.0000, 6.0000, 10.0000, 14.0000]])
 
 	printf("\n---------------------------------------------\n");
 	a = tensor_init_from_array(d2, 1, 5);
 	b = tensor_init_from_array(d3, 1, 2);
 	tensor_print(a);
 	tensor_print(b);
-	printf("\n>>> conv1d(bias=1): ");
-	tensor_print(conv1d(a, b, 1));
+	printf("\n>>> conv1d(bias=1, stride=1): ");
+	tensor_print(conv1d(a, b, 1, 1));
 	tensor_free(a);
 	tensor_free(b);
 
@@ -38,8 +44,18 @@ int			main(void) {
 	b = tensor_init_random(1, 3);
 	tensor_print(a);
 	tensor_print(b);
-	printf("\n>>> conv1d(bias=0.3): ");
-	tensor_print(conv1d(a, b, 0.3));
+	printf("\n>>> conv1d(bias=0.3, stride=1): ");
+	tensor_print(conv1d(a, b, 0.3, 1));
+	tensor_free(a);
+	tensor_free(b);
+
+	printf("\n---------------------------------------------\n");
+	a = tensor_init_random(1, 3);
+	b = tensor_init_random(1, 3);
+	tensor_print(a);
+	tensor_print(b);
+	printf("\n>>> conv1d(bias=0, stride=2): ");
+	tensor_print(conv1d(a, b, 0, 2));
 	tensor_free(a);
 	tensor_free(b);
 

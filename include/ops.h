@@ -14,6 +14,6 @@ struct Tensor	*softmax(struct Tensor *tensor);
 struct Tensor	*softmax_(struct Tensor *tensor);
 
 struct Tensor	*sdpa(struct Tensor *q, struct Tensor *k, struct Tensor *v);
-struct Tensor	*conv1d(struct Tensor *tensor, struct Tensor *kernel, float bias);
+struct Tensor	*conv1d(struct Tensor *tensor, struct Tensor *kernel, float const bias, uint32_t const stride);
 
 #endif /* __OPS_H__ */

@@ -12,13 +12,14 @@ struct Tensor {
 
 #define TENSOR_NUMEL(x)	((x)->shape[0] * (x)->shape[1])
 
-struct Tensor	*tensor_init(uint32_t n, uint32_t m);
-struct Tensor	*tensor_init_random(uint32_t n, uint32_t m);
-struct Tensor	*tensor_init_constant(uint32_t n, uint32_t m, float x);
-struct Tensor	*tensor_init_from_array(float *data, uint32_t r, uint32_t c);
-struct Tensor	*tensor_init_from_tensor(struct Tensor *src);
+struct Tensor	*tensor_init(uint32_t const n, uint32_t const m);
+struct Tensor	*tensor_init_random(uint32_t const n, uint32_t const m);
+struct Tensor	*tensor_init_constant(uint32_t const n, uint32_t const m, float const x);
+struct Tensor	*tensor_init_from_array(float const *data, uint32_t const n, uint32_t const m);
+struct Tensor	*tensor_init_from_tensor(struct Tensor const *src);
+struct Tensor	*tensor_init_eye(uint32_t const size);
 
-void		tensor_print(struct Tensor *tensor);
+void		tensor_print(struct Tensor const *tensor);
 void		tensor_free(struct Tensor *tensor);
 
 #endif /* __TENSOR_H__ */
