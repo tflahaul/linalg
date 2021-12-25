@@ -43,3 +43,13 @@ struct Tensor		*softmax_(struct Tensor *tensor) {
 	__ops_softmax_cpu(tensor, tensor);
 	return (tensor);
 }
+
+struct Tensor		*flatten(struct Tensor *tensor) {
+	return (tensor_init_from_array(tensor->data, 1, TENSOR_NUMEL(tensor)));
+}
+
+struct Tensor		*flatten_(struct Tensor *tensor) {
+	tensor->shape[1] = TENSOR_NUMEL(tensor);
+	tensor->shape[0] = 1;
+	return (tensor);
+}

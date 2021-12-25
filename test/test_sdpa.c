@@ -16,8 +16,19 @@ int			main(void) {
 	tensor_print(q);
 	tensor_print(k);
 	tensor_print(v);
+	printf("\n>>> scaled dot-product attention:\n");
+	tensor_print(sdpa(q, transpose(k), v));
 
-	printf("\n>>> scaled dot-product attention\n");
+// expected : tensor([[10.0000, 0.0000]])
+
+	printf("\n---------------------------------------------\n");
+	q = tensor_init_random(1, 8);
+	k = tensor_init_random(3, 8);
+	v = tensor_init_random(3, 3);
+	tensor_print(q);
+	tensor_print(k);
+	tensor_print(v);
+	printf("\n>>> scaled dot-product attention:\n");
 	tensor_print(sdpa(q, transpose(k), v));
 
 	return (0);

@@ -6,14 +6,17 @@ Linear algebra C library (with tensors)
 
 ```
 add, sub, scl      # binary ops
-relu, softmax      # unary ops
+relu, softmax      # activations
+pad                # adds padding to a tensor
+flatten            # reshape a tensor into a vector
 conv1d             # 1D convolution over a vector
+conv2d             # 2D convolution over a matrix
 sdpa               # scaled dot-product attention
 ```
 
 ### linalg
 
-Library includes 19 linear algebra functions :
+Library includes 20 linear algebra functions :
 
 ```
 linear_combination # linear combination of a tensor and a vector of scalars
@@ -24,6 +27,7 @@ norm               # euclidean norm
 norm_inf           # supremum norm
 angle              # cosine of the angle between two given vectors
 cross              # cross product of two tensors both of shape nx3
+cumprod            # cumulative product of the elements in a tensor
 outer              # outer product of two vectors
 mm                 # matrix multiplication
 trace              # returns the trace of a square matrix

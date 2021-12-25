@@ -11,7 +11,7 @@ DIRS		=	$(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
 CCFLAGS		=	-Wall					\
 			-Wextra					\
 			-Werror					\
-			-Ofast					\
+			-O2					\
 			-Wpadded				\
 			-Wno-unused-result			\
 			-Wsign-compare				\
