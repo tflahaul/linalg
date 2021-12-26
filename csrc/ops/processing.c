@@ -36,9 +36,9 @@ struct Tensor		*conv2d(struct Tensor *tensor, struct Tensor *kernel,
 	uint32_t const	w = ((tensor->shape[1] - (kernel->shape[1] - 1) - 1) / stride) + 1;
 	struct Tensor	*out = tensor_init_constant(h, w, bias);
 	for (uint32_t i = 0; i < h; i++)
-		for (uint32_t j = 0; j < w; j++)
-			for (uint32_t k = 0; k < kernel->shape[0]; k++)
-				for (uint32_t l = 0; l < kernel->shape[1]; l++)
+		for (uint32_t k = 0; k < kernel->shape[0]; k++)
+			for (uint32_t l = 0; l < kernel->shape[1]; l++)
+				for (uint32_t j = 0; j < w; j++)
 					out->data[i * w + j] += kernel->data[k * kernel->shape[1] + l] * tensor->data[(i + k) * tensor->shape[1] + l + j];
 	return (out);
 }
