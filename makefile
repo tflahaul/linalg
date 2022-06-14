@@ -8,14 +8,12 @@ HEADERS		=	include
 DIRS		=	$(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
 
 ##########   FLAGS   ##########
-CCFLAGS		=	-Wall					\
-			-Wextra					\
-			-Werror					\
-			-O2 -ffast-math 			\
-			-Wpadded				\
-			-Wno-unused-result			\
-			-Wsign-compare				\
-			-Wunreachable-code			\
+CCFLAGS		=	-Wall -Wextra -Werror		\
+			-O2 -ffast-math 		\
+			-Wpadded			\
+			-Wno-unused-result		\
+			-Wsign-compare			\
+			-Wunreachable-code		\
 			-pedantic
 
 INCFLAG		=	-I $(HEADERS)

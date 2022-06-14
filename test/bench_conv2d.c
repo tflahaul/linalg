@@ -6,8 +6,8 @@
 #include <time.h>
 
 int			main(void) {
-	struct Tensor	*a = tensor_init_random(512, 512);
-	struct Tensor	*b = tensor_init_random(128, 128);
+	struct Tensor	*a = tensor_init_random(2048, 2048);
+	struct Tensor	*b = tensor_init_random(512, 512);
 	struct Tensor	*c;
 	clock_t		start, end;
 
